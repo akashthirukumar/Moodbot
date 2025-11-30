@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MoodBot — Powered by Birla Opus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>MoodBot — Powered by Birla Opus</h1>
+      <p class="subtitle">Intelligent colour & paint planning assistant (client-side)</p>
+    </header>
+
+    <section id="wizard" class="card">
+      <div id="progress" class="progress">Step <span id="stepNumber">1</span> / 5</div>
+
+      <form id="wizardForm">
+        <div class="step" data-step="1">
+          <h2>Room basics</h2>
+          <label>Room type
+            <select name="roomType">
+              <option value="living">Living Room</option>
+              <option value="bedroom">Bedroom</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="bathroom">Bathroom</option>
+              <option value="studio">Studio / Office</option>
+            </select>
+          </label>
+
+          <label>Width (ft)
+            <input type="number" name="width" min="1" value="12" required>
+          </label>
+
+          <label>Length (ft)
+            <input type="number" name="length" min="1" value="15" required>
+          </label>
+
+          <label>Ceiling height (ft)
+            <input type="number" name="ceilingHeight" min="6" step="0.1" value="8" required>
+          </label>
+        </div>
+
+        <div class="step" data-step="2" hidden>
+          <h2>Light & Objective</h2>
+          <label>Daylight strength
+            <select name="daylight">
+              <option value="strong">Strong</option>
+              <option value="medium">Medium</option>
+              <option value="weak">Weak</option>
+            </select>
+          </label>
+          <label>Daylight tone
+            <select name="daylightTone">
+              <option value="warm">Warm (south/west)</option>
+              <option value="neutral">Neutral</option>
+              <option value="cool">Cool (north)</option>
+            </select>
+          </label>
+
+          <label>Artificial light colour temperature
+            <select name="artificialTone">
+              <option value="warm">Warm (2700K)</option>
+              <option value="neutral">Neutral (3500K)</option>
+              <option value="cool">Cool (5000K)</option>
+            </select>
+          </label>
+
+          <label>Objective
+            <select name="objective">
+              <option value="bigger">Make room feel bigger</option>
+              <option value="cozier">Make room feel cozier</option>
+              <option value="brighter">Make room brighter</option>
+              <option value="softer">Softer / Minimal</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="step" data-step="3" hidden>
+          <h2>Personality quiz (4 quick questions)</h2>
+          <p>Select the option closest to you for each pair.</p>
+          <label>Energy: 
+            <select name="trait1">
+              <option value="E">Extrovert (lively)</option>
+              <option value="I">Introvert (calm)</option>
+            </select>
+          </label>
+          <label>Style:
+            <select name="trait2">
+              <option value="S">Sensing (grounded)</option>
+              <option value="N">Intuitive (imaginative)</option>
+            </select>
+          </label>
+          <label>Decision:
+            <select name="trait3">
+              <option value="T">Thinking (crisp)</option>
+              <option value="F">Feeling (subdued)</option>
+            </select>
+          </label>
+          <label>Planning:
+            <select name="trait4">
+              <option value="J">Judging (structured)</option>
+              <option value="P">Perceiving (playful)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="step" data-step="4" hidden>
+          <h2>Household & Finishes</h2>
+          <label>Kids at home?
+            <select name="kids">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </label>
+          <label>Pets?
+            <select name="pets">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </label>
+          <label>Flooring undertone
+            <select name="flooring">
+              <option value="warm">Warm wood / terracotta</option>
+              <option value="neutral">Neutral tile / concrete</option>
+              <option value="cool">Cool stone / grey</option>
+            </select>
+          </label>
+          <label>Preferred accent hue (optional)
+            <input name="preferredAccent" placeholder="e.g. blue, terracotta">
+          </label>
+        </div>
+
+        <div class="step" data-step="5" hidden>
+          <h2>Review & Generate</h2>
+          <p>Click generate to get your personalised palette, explanation and paint estimate.</p>
+          <button type="button" id="generateBtn" class="primary">Generate</button>
+        </div>
+
+        <nav class="wizard-nav">
+          <button type="button" id="backBtn">Back</button>
+          <button type="button" id="nextBtn">Next</button>
+        </nav>
+      </form>
+    </section>
+
+    <section id="results" class="card" hidden>
+      <h2>Results</h2>
+      <div id="palettePreview" class="palette"></div>
+      <div id="explanation" class="explain"></div>
+      <div id="estimates" class="estimates"></div>
+
+      <div class="exports">
+        <button id="exportJson">Export JSON</button>
+        <button id="restart">Start Over</button>
+      </div>
+    </section>
+
+    <footer class="footer card">
+      <small>Offline-first, client-side demo — see README for running instructions.</small>
+    </footer>
+  </main>
+
+  <script src="engine.js"></script>
+</body>
+</html>
