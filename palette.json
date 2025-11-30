@@ -1,0 +1,14 @@
+[
+  {"id":"POW-01","name":"Porcelain White","hex":"#F5F7FA","lrv":92,"undertone":"neutral","family":"white"},
+  {"id":"SAND-02","name":"Warm Sand","hex":"#E8D8C3","lrv":78,"undertone":"warm","family":"beige"},
+  {"id":"SMOKE-03","name":"Smoky Grey","hex":"#9AA3AB","lrv":58,"undertone":"neutral","family":"grey"},
+  {"id":"MOSS-04","name":"Soft Moss","hex":"#B5C9A1","lrv":52,"undertone":"cool","family":"green"},
+  {"id":"TEAL-05","name":"Quiet Teal","hex":"#4E9A93","lrv":34,"undertone":"cool","family":"teal"},
+  {"id":"COVE-06","name":"Ocean Cove","hex":"#3E8DA8","lrv":28,"undertone":"cool","family":"blue"},
+  {"id":"INK-07","name":"Midnight Ink","hex":"#1B2630","lrv":6,"undertone":"cool","family":"black"},
+  {"id":"TERR-08","name":"Terracotta","hex":"#B55A3A","lrv":22,"undertone":"warm","family":"terracotta"},
+  {"id":"BLUSH-09","name":"Muted Blush","hex":"#D9BFC1","lrv":72,"undertone":"warm","family":"pink"},
+  {"id":"SUN-10","name":"Golden Sun","hex":"#EFAF4B","lrv":48,"undertone":"warm","family":"yellow"},
+  {"id":"SAGE-11","name":"Quiet Sage","hex":"#A3B6A6","lrv":60,"undertone":"cool","family":"green"},
+  {"id":"STONE-12","name":"Neutral Stone","hex":"#D6D9DB","lrv":82,"undertone":"neutral","family":"grey"}
+]
