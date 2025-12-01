@@ -1,9 +1,7 @@
 /* engine.js
    Robust client-side rule-based engine and DOM wiring for MoodBot.
-   This version:
-   - waits for DOM to be ready
-   - validates step 1 inputs before navigating forward
-   - provides safe fallbacks and console logging for easier debugging
+   Fixes: more reliable validation for Step 1 (handles whitespace, string numbers),
+   logs values to console for quick debugging, and avoids treating "0" as falsy.
 */
 (function(){
   document.addEventListener('DOMContentLoaded', () => {
@@ -44,19 +42,33 @@
         showStep(currentStep);
       });
 
-      if (nextBtn) nextBtn.addEventListener('click', ()=> {
+      // helper to validate numeric inputs (non-empty, numeric, > 0)
+      function isValidNumber(val){
+        if (val === null || val === undefined) return false;
+        const s = String(val).trim();
+        if (s === '') return false;
+        const n = Number(s);
+        if (Number.isNaN(n)) return false;
+        return n > 0;
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', (ev)=> {
         // Basic validation for step 1 (room dimensions)
         if (currentStep === 1) {
-          const width = wizardForm.elements['width']?.value;
-          const length = wizardForm.elements['length']?.value;
-          const ceilingHeight = wizardForm.elements['ceilingHeight']?.value;
-          if (!width || !length || !ceilingHeight) {
-            alert('Please fill the room dimensions before continuing.');
-            return;
-          }
-          // additional basic numeric sanity check
-          if (Number(width) <= 0 || Number(length) <= 0 || Number(ceilingHeight) <= 0) {
-            alert('Please enter valid positive numbers for dimensions.');
+          const widthEl = wizardForm.elements['width'];
+          const lengthEl = wizardForm.elements['length'];
+          const ceilingEl = wizardForm.elements['ceilingHeight'];
+
+          const width = widthEl ? widthEl.value : null;
+          const length = lengthEl ? lengthEl.value : null;
+          const ceilingHeight = ceilingEl ? ceilingEl.value : null;
+
+          // Debug: log values to console to help diagnose issues
+          console.debug('[MoodBot] Step1 values:', { width, length, ceilingHeight });
+
+          if (!isValidNumber(width) || !isValidNumber(length) || !isValidNumber(ceilingHeight)) {
+            alert('Please enter valid positive numbers for Width, Length and Ceiling height before continuing.');
+            // keep the user on current step
             return;
           }
         }
